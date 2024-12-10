@@ -28,9 +28,11 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            @isset($slot)
+                <main>
+                    {{ $slot }}
+                </main>
+            @endisset
         </div>
     </body>
 </html>

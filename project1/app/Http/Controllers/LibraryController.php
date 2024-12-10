@@ -6,7 +6,7 @@ use App\Models\Song;
 
 class LibraryController extends Controller
 {
-    public function index()
+    public function libraryView()
     {
         $songs = Song::all();
         return view('library', compact('songs'));

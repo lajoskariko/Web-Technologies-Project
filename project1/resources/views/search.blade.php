@@ -1,11 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
-<h2>Search Music</h2>
-<form action="{{ route('search.results') }}" method="GET" class="search-form">
-    <input type="text" name="query" placeholder="Search for songs, artists, or albums..." required>
-    <button type="submit">Search</button>
-</form>
+<x-app-layout>
+    <h2>Search Music</h2>
+    <form action="{{ route('search.results') }}" method="GET" class="search-form">
+        <input type="text" name="query" placeholder="Search for songs, artists, or albums..." required>
+        <button type="submit">Search</button>
+    </form>
 
     @if(isset($songs))
         <h3>Search Results for "{{ request()->input('query') }}"</h3>
@@ -23,4 +21,4 @@
             </div>
         @endif
     @endif
-@endsection
+</x-app-layout>

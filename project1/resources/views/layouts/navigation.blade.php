@@ -53,7 +53,7 @@
                     </x-dropdown>
                 @endauth
                 @guest 
-                    <input type="button" onclick="{{ route('login') }}" value="Log in">
+                    <a href="{{ route('login') }}" class="btn">Log in</a>
                 @endguest
             </div>
 
@@ -103,7 +103,7 @@
                 </div>
             @endauth
             @guest 
-                <input type="button" onclick="alert('Hello World!')" value="Click Me!">
+                <a href="{{ route('login') }}" class="btn">Log in</a>
             @endguest
         </div>
     </div>

@@ -7,7 +7,7 @@ use App\Models\Song;
 
 class SearchController extends Controller
 {
-    public function index()
+    public function searchView()
     {
         return view('search');
     }

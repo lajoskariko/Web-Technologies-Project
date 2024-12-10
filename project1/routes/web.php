@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'homeView'])->name('home');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'libraryView'])->name('library');
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'searchView'])->name('search');
 Route::get('/search/results', [SearchController::class, 'results'])->name('search.results');
+Route::get('/admin', [AdminController::class, 'adminView'])->name('admin')->middleware('auth');
 
 Route::redirect('/', '/home')->name('dashboard');
 

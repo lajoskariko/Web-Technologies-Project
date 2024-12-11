@@ -8,4 +8,19 @@ class AdminController extends Controller
     {
         return view('admin');
     }
+
+    public function createView()
+    {
+        return view('create');
+    }
+
+    public function updateView()
+    {
+        return view('update');
+    }
+
+    public function deleteView()
+    {
+        return view('delete');
+    }
 }

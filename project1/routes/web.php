@@ -12,6 +12,9 @@ Route::get('/library', [App\Http\Controllers\LibraryController::class, 'libraryV
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'searchView'])->name('search');
 Route::get('/search/results', [SearchController::class, 'results'])->name('search.results');
 Route::get('/admin', [AdminController::class, 'adminView'])->name('admin')->middleware('auth');
+Route::get('/create', [AdminController::class, 'createView'])->name('create')->middleware('auth');
+Route::get('/update', [AdminController::class, 'updateView'])->name('update')->middleware('auth');
+Route::get('/delete', [AdminController::class, 'deleteView'])->name('delete')->middleware('auth');
 
 Route::redirect('/', '/home')->name('dashboard');
 

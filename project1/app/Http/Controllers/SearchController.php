@@ -17,14 +17,26 @@ class SearchController extends Controller
         $query = $request->input('query');
 
         if (!$query) {
-            return redirect()->route('search')->with('error', 'Please enter a search term.');
+            return response()->json(['error' => 'No query provided'], 400);
         }
 
+        // Search logic
         $songs = Song::where('title', 'LIKE', "%{$query}%")
-                     ->orWhere('artist', 'LIKE', "%{$query}%")
-                     ->orWhere('album', 'LIKE', "%{$query}%")
-                     ->get();
+            ->orWhere('artist', 'LIKE', "%{$query}%")
+            ->orWhere('album', 'LIKE', "%{$query}%")
+            ->get();
 
-        return view('search', compact('songs'));
+        // Return JSON response for AJAX
+        return response()->json([
+            'songs' => $songs->map(function ($song) {
+                return [
+                    'title' => $song->title,
+                    'artist' => $song->artist,
+                    'cover_image' => asset('images/covers/' . $song->cover_image),
+                    'file' => asset('music/' . $song->file),
+                ];
+            }),
+        ]);
     }
+
 }

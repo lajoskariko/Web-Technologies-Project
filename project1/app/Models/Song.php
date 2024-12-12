@@ -17,3 +17,6 @@ class Song extends Model
         'release_date',
     ];
 }
+
+// song belongs to an artist (one or more)
+// song belongs to an album

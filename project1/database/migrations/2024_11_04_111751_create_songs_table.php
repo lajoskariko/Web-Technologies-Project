@@ -11,7 +11,9 @@ return new class extends Migration
     Schema::create('songs', function (Blueprint $table) {
         $table->id();
         $table->string('title');
+        // artist should be a foreign key referencing the id column of the artists table
         $table->string('artist');
+        //almbum should be a foreign key referencing the id column of the albums table
         $table->string('album')->nullable();
         $table->date('release_date')->nullable();
         $table->timestamps();

@@ -34,6 +34,83 @@
                     {{ $slot }}
                 </main>
             @endisset
+            <footer>
+                <div class="music-player">
+                    <div class="music-info">
+                        <img src="{{ asset('image/placeholder.png') }}" alt="Album Art">
+                        <div class="music-details">
+                            <span class="music-title">Song Title</span>
+                            <span class="music-artist">Artist Name</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button onclick="playAudio()">Play</button>
+                        <button onclick="pauseAudio()">Pause</button>
+                    </div>
+                    <audio id="audio-player" src="/path/to/song.mp3"></audio>
+                </div>
+                
+                <script>
+                    const audioPlayer = document.getElementById('audio-player');
+                
+                    function playAudio() {
+                        audioPlayer.play();
+                    }
+                
+                    function pauseAudio() {
+                        audioPlayer.pause();
+                    }
+                </script>
+                <div class="music-player">
+                    <div class="music-info">
+                        <img src="{{ asset('image/placeholder.png') }}" alt="Album Art">
+                        <div class="music-details">
+                            <span class="music-title">Song Title</span>
+                            <span class="music-artist">Artist Name</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button onclick="playAudio()">Play</button>
+                        <button onclick="pauseAudio()">Pause</button>
+                    </div>
+                    <audio id="audio-player" src=""></audio>
+                </div>
+            
+                <script>
+                    const audioPlayer = document.getElementById('audio-player');
+                    const playerTitle = document.getElementById('player-title');
+                    const playerArtist = document.getElementById('player-artist');
+                    const playerCover = document.getElementById('player-cover');
+            
+                    const songCards = document.querySelectorAll('.song-card');
+                    songCards.forEach(card => {
+                        card.addEventListener('click', () => {
+                            const src = card.getAttribute('data-src');
+                            const title = card.getAttribute('data-title');
+                            const artist = card.getAttribute('data-artist');
+                            const cover = card.getAttribute('data-cover');
+            
+                            audioPlayer.src = src;
+                            playerTitle.textContent = title;
+                            playerArtist.textContent = artist;
+                            playerCover.src = cover;
+            
+                            audioPlayer.play();
+                        });
+                    });
+            
+                    function playAudio() {
+                        audioPlayer.play();
+                    }
+            
+                    function pauseAudio() {
+                        audioPlayer.pause();
+                    }
+                </script>    
+            </footer>
+        
+            <script src="{{ asset('js/app.js') }}"></script>
         </div>
+        
     </body>
 </html>

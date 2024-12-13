@@ -6,7 +6,7 @@
         <div class="song-card" data-src="{{ asset('music/' . $song->file) }}" data-title="{{ $song->title }}" data-artist="{{ $song->artist }}">
             <img src="{{ asset('images/covers/' . $song->cover_image) }}" alt="{{ $song->title }}">
             <h3>{{ $song->title }}</h3>
-            <p>{{ $song->artist }}</p>
+            <p>{{ $song->artist->name }}</p>
         </div>
         @endforeach
     </div>

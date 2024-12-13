@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\ForeignIdColumnDefinition;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,10 +12,8 @@ return new class extends Migration
     Schema::create('songs', function (Blueprint $table) {
         $table->id();
         $table->string('title');
-        // artist should be a foreign key referencing the id column of the artists table
-        $table->string('artist');
-        //almbum should be a foreign key referencing the id column of the albums table
-        $table->string('album')->nullable();
+        $table->foreignIdFor(\App\Models\Artist::class);
+        $table->foreignIdFor(\App\Models\Album::class);
         $table->date('release_date')->nullable();
         $table->timestamps();
     });

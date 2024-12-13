@@ -3,13 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Artist;
-use App\Models\Album;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Song>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Album>
  */
-class SongFactory extends Factory
+class AlbumFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +17,10 @@ class SongFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->word(),
-            'artist_id' => Artist::factory(),
-            'album_id' => Album::factory(),
+            'name' => fake()->name(),
+            'artist_id' => \App\Models\Artist::factory(),
+            'description' => fake()->sentence(),
+            'cover' => 'test.jpg',
             'release_date' => fake()->date(),
         ];
     }

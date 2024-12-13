@@ -17,7 +17,7 @@ class AlbumFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->word(),
             'artist_id' => \App\Models\Artist::factory(),
             'description' => fake()->sentence(),
             'cover' => 'test.jpg',

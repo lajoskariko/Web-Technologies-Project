@@ -14,7 +14,17 @@ class Song extends Model
         'title',
         'release_date',
     ];
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
 }
 
-// song belongs to an artist (one or more)
+// song belongs to an artist
 // song belongs to an album

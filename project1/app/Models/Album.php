@@ -15,6 +15,16 @@ class Album extends Model
         'cover',
         'release_date',
     ];
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+
+    public function song()
+    {
+        return $this->hasMany(Song::class);
+    }
 }
 
 // album has many songs

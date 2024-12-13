@@ -15,7 +15,16 @@ class Artist extends Model
         'cover',
     ];
 
+    public function album()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+    public function song()
+    {
+        return $this->hasMany(Song::class);
+    }
 }
 
-//artitst has many albums (or none)
+//artist has many albums (or none)
 //artist has many songs (or none)

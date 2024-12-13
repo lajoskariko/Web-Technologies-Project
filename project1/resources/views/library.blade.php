@@ -114,11 +114,11 @@
     <div class="music-grid">
         @foreach($songs as $song)
             <div class="song-card"
-                 data-src="{{ asset('music/' . $song->file) }}"
+                 data-src="{{ asset('storage/' . $song->file) }}"
                  data-title="{{ $song->title }}"
                  data-artist="{{ $song->artist }}"
-                 data-cover="{{ asset('images/covers/' . $song->cover_image) }}">
-                <img src="{{ asset('images/covers/' . $song->cover_image) }}" alt="{{ $song->title }}">
+                 data-cover="{{ asset('storage/' . $song->cover_path) }}">
+                <img src="{{ asset('storage/' . $song->cover_path) }}" alt="{{ $song->title }}">
                 <h3>{{ $song->title }}</h3>
                 <p>{{ $song->artist }}</p>
             </div>

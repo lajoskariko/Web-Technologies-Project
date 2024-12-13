@@ -13,7 +13,10 @@ return new class extends Migration
         $table->string('title');
         $table->string('artist');
         $table->string('album')->nullable();
+        $table->string('genre')->nullable();
         $table->date('release_date')->nullable();
+        $table->string('file_path');
+        $table->string('cover_path')->nullable();
         $table->timestamps();
     });
     }

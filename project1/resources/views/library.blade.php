@@ -116,11 +116,11 @@
             <div class="song-card"
                  data-src="{{ asset('storage/' . $song->file_path) }}"
                  data-title="{{ $song->title }}"
-                 data-artist="{{ $song->artist }}"
+                 data-artist="{{ $song->artist->name}}"
                  data-cover="{{ asset('storage/' . $song->cover_path) }}">
                 <img src="{{ asset('storage/' . $song->cover_path) }}" alt="{{ $song->title }}">
                 <h3>{{ $song->title }}</h3>
-                <p>{{ $song->artist }}</p>
+                <p>{{ $song->artist->name }}</p>
             </div>
         @endforeach
     </div>

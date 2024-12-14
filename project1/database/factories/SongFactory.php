@@ -23,6 +23,8 @@ class SongFactory extends Factory
             'artist_id' => Artist::factory(),
             'album_id' => Album::factory(),
             'release_date' => fake()->date(),
+            'file_path' => 'songAssets/source/placeholder.wav',
+            'cover_path' => 'songAssets/images/placeholder.png',
         ];
     }
 }

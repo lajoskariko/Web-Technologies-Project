@@ -122,6 +122,10 @@
         @endforeach
     </div>
 
+    <div>
+        {{ $songs->links() }}
+    </div>
+
     <div class="music-player">
         <div class="music-info">
             <img id="player-cover" src="" alt="Album Art">

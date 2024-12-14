@@ -57,8 +57,8 @@
                     const playerTitle = document.getElementById('player-title');
                     const playerArtist = document.getElementById('player-artist');
                     const playerCover = document.getElementById('player-cover');
-                    const musicPlayer = document.getElementById('music-player');
-            
+                    const musicPlayer = document.getElementById('music-player'); // Reference to the player div
+
                     // Add event listener to each song card to handle click events
                     const songCards = document.querySelectorAll('.song-card');
                     songCards.forEach(card => {
@@ -68,36 +68,36 @@
                             const artist = card.getAttribute('data-artist');
                             const cover = card.getAttribute('data-cover');
 
-
-                            // If the audio is already playing, stop it
-                            if (!audioPlayer.paused) {
-                                audioPlayer.pause();  // Pause the current audio
-                            }
-
-                                
-                            audioPlayer.src = src;
+                            // Update audio source and player details
+                            audioPlayer.src = src;  // Use the full path directly
                             playerTitle.textContent = title;
                             playerArtist.textContent = artist;
                             playerCover.src = cover;
-            
+
                             // Show the music player
                             musicPlayer.style.display = 'flex';
-            
+
                             // Play the selected song
                             audioPlayer.play();
+
+                            // Update the play/pause button to 'Pause'
                             playPauseButton.textContent = 'Pause';
+                            console.log('Playing song:', title);
                         });
                     });
-            
+
                     function togglePlayPause() {
-                    if (audioPlayer.paused) {
-                        audioPlayer.play();
-                        playPauseButton.textContent = 'Pause'; // Change to 'Pause' when playing
-                    } else {
-                        audioPlayer.pause();
-                        playPauseButton.textContent = 'Play'; // Change to 'Play' when paused
+                        if (audioPlayer.paused) {
+                            console.log('Audio is paused, playing now...');
+                            audioPlayer.play();
+                            playPauseButton.textContent = 'Pause';  // Update button text to 'Pause'
+                        } else {
+                            console.log('Audio is playing, pausing now...');
+                            audioPlayer.pause();
+                            playPauseButton.textContent = 'Play';   // Update button text to 'Play'
+                        }
                     }
-                }
+
                 </script>
             </footer>
             <script src="{{ asset('js/app.js') }}"></script>

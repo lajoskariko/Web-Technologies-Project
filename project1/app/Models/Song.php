@@ -13,6 +13,8 @@ class Song extends Model
     protected $fillable = [
         'title',
         'release_date',
+        'file_path',
+        'cover_path',
     ];
 
     public function artist()

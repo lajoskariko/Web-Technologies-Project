@@ -221,15 +221,15 @@ h3 {
 .admin-buttons {
     display: flex;
     justify-content: center;
-    gap: 100px; 
+    gap: 100px;
 }
 
 .create-button, .update-button, .delete-button {
     font-size: 60px;
     color: #121212;
     padding: 10px 20px;
-    border-radius: 10px; 
-    cursor: pointer; 
+    border-radius: 10px;
+    cursor: pointer;
     text-align: center;
 }
 
@@ -351,9 +351,103 @@ h3 {
 
 
 
-.update-header {
-    font-size: 60px;
+/* Ensure the body inherits dark theme */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* Dark background for the whole page */
+    color: #FFFFFF; /* Light text color */
 }
+
+.update-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #1F1F1F; /* Dark background for the content */
+    border-radius: 8px; /* Rounded corners for a smoother look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow to lift the container */
+}
+
+h1, h2 {
+    color: #FFFFFF; /* White headers for better visibility */
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: #B3B3B3; /* Lighter text for the song list */
+}
+
+ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.update-link {
+    color: #1DB954; /* Green color for the edit links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.update-link:hover {
+    color: #1AA34A; /* Lighter green on hover */
+}
+
+.update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.update-form label {
+    font-size: 16px;
+    color: #B3B3B3;
+}
+
+.update-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.update-form button {
+    padding: 12px;
+    background-color: #1DB954;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.update-form button:hover {
+    background-color: #1AA34A; /* Darker green on hover */
+}
+
+/* Success and error message styling */
+.success-message, .error-message {
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    background-color: #28a745;
+    color: #FFFFFF;
+}
+
+.error-message {
+    background-color: #dc3545;
+    color: #FFFFFF;
+}
+
 
 .delete-header {
     font-size: 60px;

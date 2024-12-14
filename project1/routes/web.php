@@ -14,6 +14,8 @@ Route::get('/search/results', [SearchController::class, 'results'])->name('searc
 Route::get('/admin', [AdminController::class, 'adminView'])->name('admin')->middleware('auth');
 Route::get('/create', [AdminController::class, 'createView'])->name('create')->middleware('auth');
 Route::get('/update', [AdminController::class, 'updateView'])->name('update')->middleware('auth');
+Route::get('/update/{id}', [AdminController::class, 'updateView'])->name('edit.song');
+Route::put('/update/{id}', [AdminController::class, 'updateSong'])->name('update.song');
 Route::get('/delete', [AdminController::class, 'deleteView'])->name('delete')->middleware('auth');
 
 Route::redirect('/', '/home')->name('dashboard');

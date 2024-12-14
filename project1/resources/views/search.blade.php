@@ -174,36 +174,62 @@
         <audio id="audio-player" src=""></audio>
     </div>
 
-    <script>
-        const audioPlayer = document.getElementById('audio-player');
-        const playerTitle = document.getElementById('player-title');
-        const playerArtist = document.getElementById('player-artist');
-        const playerCover = document.getElementById('player-cover');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('search-form');
+        const searchResults = document.getElementById('search-results');
 
-        const songCards = document.querySelectorAll('.song-card');
-        songCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const src = card.getAttribute('data-src');
-                const title = card.getAttribute('data-title');
-                const artist = card.getAttribute('data-artist');
-                const cover = card.getAttribute('data-cover');
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
 
-                audioPlayer.src = src;
-                playerTitle.textContent = title;
-                playerArtist.textContent = artist;
-                playerCover.src = cover;
+            const query = document.getElementById('search-query').value;
 
-                audioPlayer.play();
+            if (!query.trim()) {
+                alert('Please enter a search term.');
+                return;
+            }
+
+            // AJAX request to fetch search results
+            fetch("{{ route('search.results') }}", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', // Identify as AJAX request
+                },
+                body: JSON.stringify({ query: query }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.songs.length === 0) {
+                    searchResults.innerHTML = `<p>No results found for "${query}".</p>`;
+                } else {
+                    let html = `<h3>Search Results for "${query}"</h3><div class="music-grid">`;
+
+                    data.songs.forEach(song => {
+                        html += `
+                        <div class="song-card" data-src="${song.file}" data-title="${song.title}" data-artist="${song.artist}">
+                            <img src="${song.cover_image}" alt="${song.title}">
+                            <h3>${song.title}</h3>
+                            <p>${song.artist}</p>
+                        </div>`;
+                    });
+
+                    html += `</div>`;
+                    searchResults.innerHTML = html;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                searchResults.innerHTML = '<p>An error occurred. Please try again later.</p>';
             });
         });
-
-        function playAudio() {
-            audioPlayer.play();
-        }
-
-        function pauseAudio() {
-            audioPlayer.pause();
-        }
-    </script>
+    });
+</script>
+@endsection
 
 </x-app-layout>

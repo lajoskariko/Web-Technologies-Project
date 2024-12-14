@@ -65,7 +65,8 @@
                     </x-dropdown>
                 @endauth
                 @guest 
-                    <a href="{{ route('login') }}" class="btn">Log in</a>
+                    <a href="{{ route('login') }}" class="px-10">Log in</a>
+                    <a href="{{ route('register') }}" class="">Register</a>
                 @endguest
             </div>
 
@@ -120,7 +121,8 @@
                 </div>
             @endauth
             @guest 
-                <a href="{{ route('login') }}" class="btn">Log in</a>
+                <a href="{{ route('login') }}" class="px-10">Log in</a>
+                <a href="{{ route('register') }}" class="">Register</a>
             @endguest
         </div>
     </div>

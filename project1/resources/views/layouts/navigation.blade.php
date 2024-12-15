@@ -24,6 +24,14 @@
                         {{ __('Library') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('artist')" :active="request()->routeIs('artist')">
+                        {{ __('Artist') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('album')" :active="request()->routeIs('album')">
+                        {{ __('Album') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}
                     </x-nav-link>

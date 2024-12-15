@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'homeView'])->name('home');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'libraryView'])->name('library');
+Route::get('/album', [App\Http\Controllers\AlbumsController::class, 'albumView'])->name('album');
+Route::get('/artist', [App\Http\Controllers\ArtistsController::class, 'artistView'])->name('artist');
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'searchView'])->name('search');
 Route::get('/search/results', [SearchController::class, 'results'])->name('search.results');
 Route::get('/admin', [AdminController::class, 'adminView'])->name('admin')->middleware('auth');

@@ -33,15 +33,15 @@
 
                 <!-- Title Field -->
                 <label for="title">Song Title:</label>
-                <input type="text" id="title" name="title" value="{{ old('title', $song->title) }}" required>
+                <input type="text" id="title" name="title" value="{{ old('title', $song->title) }}" placeholder='Enter song title (e.g. Blinding Lights)' required>
 
                 <!-- Artist Field -->
                 <label for="artist">Artist:</label>
-                <input type="text" id="artist" name="artist" value="{{ old('artist', $song->artist) }}" required>
+                <input type="text" id="artist" name="artist" value="{{ old('artist', $song->artist) }}" placeholder='Enter artist name (e.g. The Weeknd)' required>
 
                 <!-- Album Field -->
                 <label for="album">Album:</label>
-                <input type="text" id="album" name="album" value="{{ old('album', $song->album) }}" required>
+                <input type="text" id="album" name="album" value="{{ old('album', $song->album) }}" placeholder='Enter album name (e.g. After Hours)' required>
 
                 <!-- Release Date Field -->
                 <label for="release_date">Release Date:</label>

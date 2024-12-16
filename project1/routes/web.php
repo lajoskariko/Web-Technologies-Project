@@ -17,6 +17,8 @@ Route::get('/update', [AdminController::class, 'updateView'])->name('update')->m
 Route::get('/update/{id}', [AdminController::class, 'updateView'])->name('edit.song');
 Route::put('/update/{id}', [AdminController::class, 'updateSong'])->name('update.song');
 Route::get('/delete', [AdminController::class, 'deleteView'])->name('delete')->middleware('auth');
+Route::get('/delete', [AdminController::class, 'deleteView'])->name('delete');
+Route::post('/delete/{id}', [AdminController::class, 'deleteSong'])->name('deleteSong');
 
 Route::redirect('/', '/home')->name('dashboard');
 

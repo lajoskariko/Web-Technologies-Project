@@ -448,7 +448,12 @@ ul li {
     color: #FFFFFF;
 }
 
+.delete-link {
+    color: #fb030f;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-.delete-header {
-    font-size: 60px;
+.delete-link:hover {
+    color: #84050a;
 }

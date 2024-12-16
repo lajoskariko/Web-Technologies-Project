@@ -59,6 +59,20 @@ class AdminController extends Controller
 
     public function deleteView()
     {
-        return view('delete');
+        $songs = Song::all(); // Retrieve all songs to display in the delete view
+        return view('delete', compact('songs'));
+    }
+
+    public function deleteSong($id)
+    {
+        // Find the song by ID
+        $song = Song::find($id);
+
+        if ($song) {
+            $song->delete(); // Delete the song
+            return redirect()->route('delete')->with('success', 'Song deleted successfully!');
+        } else {
+            return redirect()->route('delete')->with('error', 'Song not found!');
+        }
     }
 }

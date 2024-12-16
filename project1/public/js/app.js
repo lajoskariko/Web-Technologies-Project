@@ -1,4 +1,6 @@
+import './bootstrap';
 document.addEventListener('DOMContentLoaded', () => {
+
     const playBtn = document.getElementById('play-btn');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -54,3 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
         playBtn.textContent = '▶️';
     });
 });
+
+document.querySelector('#liked-btn').addEventListener(
+    'click',
+    () => window.axios.post('/button/liked')
+);
+
+Echo.channel('public-channel')
+
+    .listen('.button.liked', (e) => {
+
+        alert(e.message);
+    });

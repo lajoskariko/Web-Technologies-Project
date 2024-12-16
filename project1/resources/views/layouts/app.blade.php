@@ -43,6 +43,9 @@
                             <span id="player-title" class="music-title">Song Title</span>
                             <span id="player-artist" class="music-artist">Artist Name</span>
                         </div>
+                        <div>
+                            <button id="like-btn" onclick="">Like</button>
+                        </div>
                     </div>
                     <div class="player-controls">
                         <!-- Play/Pause Toggle Button -->

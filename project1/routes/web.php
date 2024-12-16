@@ -6,6 +6,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ButtonLikedController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'homeView'])->name('home');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'libraryView'])->name('library');
@@ -23,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('button/liked', ButtonLikedController::class);
 
 require __DIR__.'/auth.php';
 

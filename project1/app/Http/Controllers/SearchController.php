@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Song;
+use App\Models\Album;
+use App\Models\Artist;
 
 class SearchController extends Controller
 {
@@ -22,8 +24,10 @@ class SearchController extends Controller
 
         // Search logic
         $songs = Song::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('artist', 'LIKE', "%{$query}%")
-            ->orWhere('album', 'LIKE', "%{$query}%")
+            ->get();
+        $albums = Album::where('name', 'LIKE', "%{$query}%")
+            ->get();
+        $artists = Artist::where('name', 'LIKE', "%{$query}%")
             ->get();
 
         // Return JSON response for AJAX
@@ -31,9 +35,23 @@ class SearchController extends Controller
             'songs' => $songs->map(function ($song) {
                 return [
                     'title' => $song->title,
-                    'artist' => $song->artist,
-                    'cover_image' => asset('images/covers/' . $song->cover_image),
-                    'file' => asset('music/' . $song->file),
+                    'artist' => $song->artist->name,
+                    'cover_image' => asset('storage/' . $song->cover_image),
+                    'file' => asset('storage/' . $song->file),
+                ];
+            }),
+
+            'albums' => $albums->map(function ($album) {
+                return [
+                    'name' => $album->name,
+                    'artist' => $album->artist->name,
+                    
+                ];
+            }),
+
+            'artists' => $artists->map(function ($artist) {
+                return [
+                    'name' => $artist->name,
                 ];
             }),
         ]);

@@ -34,6 +34,73 @@
                     {{ $slot }}
                 </main>
             @endisset
+            <footer>
+                <!-- Music Player initially hidden -->
+                <div class="music-player" id="music-player" style="display: none;">
+                    <div class="music-info">
+                        <img id="player-cover" src="{{ asset('image/placeholder.png') }}" alt="Album Art">
+                        <div class="music-details">
+                            <span id="player-title" class="music-title">Song Title</span>
+                            <span id="player-artist" class="music-artist">Artist Name</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <!-- Play/Pause Toggle Button -->
+                    <button id="play-pause-btn" onclick="togglePlayPause()">Play</button>
+                    </div>
+                    <audio id="audio-player" src=""></audio>
+                </div>
+            
+                <script>
+                    const audioPlayer = document.getElementById('audio-player');
+                    const playPauseButton = document.getElementById('play-pause-btn');
+                    const playerTitle = document.getElementById('player-title');
+                    const playerArtist = document.getElementById('player-artist');
+                    const playerCover = document.getElementById('player-cover');
+                    const musicPlayer = document.getElementById('music-player');
+            
+                    // Add event listener to each song card to handle click events
+                    const songCards = document.querySelectorAll('.song-card');
+                    songCards.forEach(card => {
+                        card.addEventListener('click', () => {
+                            const src = card.getAttribute('data-src');
+                            const title = card.getAttribute('data-title');
+                            const artist = card.getAttribute('data-artist');
+                            const cover = card.getAttribute('data-cover');
+
+
+                            // If the audio is already playing, stop it
+                            if (!audioPlayer.paused) {
+                                audioPlayer.pause();  // Pause the current audio
+                            }
+
+                                
+                            audioPlayer.src = src;
+                            playerTitle.textContent = title;
+                            playerArtist.textContent = artist;
+                            playerCover.src = cover;
+            
+                            // Show the music player
+                            musicPlayer.style.display = 'flex';
+            
+                            // Play the selected song
+                            audioPlayer.play();
+                            playPauseButton.textContent = 'Pause';
+                        });
+                    });
+            
+                    function togglePlayPause() {
+                    if (audioPlayer.paused) {
+                        audioPlayer.play();
+                        playPauseButton.textContent = 'Pause'; // Change to 'Pause' when playing
+                    } else {
+                        audioPlayer.pause();
+                        playPauseButton.textContent = 'Play'; // Change to 'Play' when paused
+                    }
+                }
+                </script>
+            </footer>
         </div>
+        
     </body>
 </html>

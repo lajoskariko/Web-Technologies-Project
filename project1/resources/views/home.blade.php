@@ -97,31 +97,4 @@
         <p>Your daily dose of awesome music</p>
         <a href="{{ route('library') }}" class="btn">Explore Now</a>
     </div>
-
-    <div class="music-player">
-        <div class="music-info">
-            <img src="/path/to/album-art.jpg" alt="Album Art">
-            <div class="music-details">
-                <span class="music-title">Song Title</span>
-                <span class="music-artist">Artist Name</span>
-            </div>
-        </div>
-        <div class="player-controls">
-            <button onclick="playAudio()">Play</button>
-            <button onclick="pauseAudio()">Pause</button>
-        </div>
-        <audio id="audio-player" src="/path/to/song.mp3"></audio>
-    </div>
-
-    <script>
-        const audioPlayer = document.getElementById('audio-player');
-
-        function playAudio() {
-            audioPlayer.play();
-        }
-
-        function pauseAudio() {
-            audioPlayer.pause();
-        }
-    </script>
 </x-app-layout>

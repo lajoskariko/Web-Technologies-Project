@@ -15,6 +15,8 @@ return new class extends Migration
         $table->foreignIdFor(\App\Models\Artist::class);
         $table->foreignIdFor(\App\Models\Album::class);
         $table->date('release_date')->nullable();
+        $table->string('file_path');
+        $table->string('cover_path')->nullable();
         $table->timestamps();
     });
     }

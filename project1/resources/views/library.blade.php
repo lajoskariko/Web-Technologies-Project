@@ -113,59 +113,15 @@
     <h2>Music Library</h2>
     <div class="music-grid">
         @foreach($songs as $song)
-        {{-- TODO This is hardcoded, needs fix --}}
-        <div class="song-card" data-src="{{ asset('music/' . $song->file) }}" data-title="{{ $song->title }}" data-artist="{{ $song->artist }}">
-            <img src="{{ asset('images/covers/' . $song->cover_image) }}" alt="{{ $song->title }}">
-            <h3>{{ $song->title }}</h3>
-            <p>{{ $song->artist->name }}</p>
-        </div>
+            <div class="song-card"
+                 data-src="{{ asset('storage/' . $song->file_path) }}"
+                 data-title="{{ $song->title }}"
+                 data-artist="{{ $song->artist->name}}"
+                 data-cover="{{ asset('storage/' . $song->cover_path) }}">
+                <img src="{{ asset('storage/' . $song->cover_path) }}" alt="{{ $song->title }}">
+                <h3>{{ $song->title }}</h3>
+                <p>{{ $song->artist->name }}</p>
+            </div>
         @endforeach
     </div>
-
-    <div class="music-player">
-        <div class="music-info">
-            <img id="player-cover" src="" alt="Album Art">
-            <div class="music-details">
-                <span class="music-title" id="player-title">No song selected</span>
-                <span class="music-artist" id="player-artist"></span>
-            </div>
-        </div>
-        <div class="player-controls">
-            <button onclick="playAudio()">Play</button>
-            <button onclick="pauseAudio()">Pause</button>
-        </div>
-        <audio id="audio-player" src=""></audio>
-    </div>
-
-    <script>
-        const audioPlayer = document.getElementById('audio-player');
-        const playerTitle = document.getElementById('player-title');
-        const playerArtist = document.getElementById('player-artist');
-        const playerCover = document.getElementById('player-cover');
-
-        const songCards = document.querySelectorAll('.song-card');
-        songCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const src = card.getAttribute('data-src');
-                const title = card.getAttribute('data-title');
-                const artist = card.getAttribute('data-artist');
-                const cover = card.getAttribute('data-cover');
-
-                audioPlayer.src = src;
-                playerTitle.textContent = title;
-                playerArtist.textContent = artist;
-                playerCover.src = cover;
-
-                audioPlayer.play();
-            });
-        });
-
-        function playAudio() {
-            audioPlayer.play();
-        }
-
-        function pauseAudio() {
-            audioPlayer.pause();
-        }
-    </script>
 </x-app-layout>

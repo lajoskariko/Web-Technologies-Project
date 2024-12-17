@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Song;
+use App\Models\Album;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,6 +16,34 @@ class AdminController extends Controller
     public function createView()
     {
         return view('create');
+    }
+
+    public function createSong(Request $request)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'artist' => 'required|string|max:255',
+            'album' => 'required|string|max:255',
+            'release_date' => 'required|date',
+        ]);
+
+        Artist::create([
+            'name' => $validated['artist'],
+        ]);
+        
+        Song::create([
+            
+            'title' => $validated['title'],
+            'release_date' => $validated['release_date']
+        ]);
+
+        Album::create([
+            'name' => $validated['album'],
+        ]);
+
+
+        return view('library');
     }
 
     public function updateView($id = null)

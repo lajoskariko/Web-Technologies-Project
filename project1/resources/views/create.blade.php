@@ -1,6 +1,7 @@
 <x-app-layout>
     <body>
-            <form action="/submit-music" method="post" enctype="multipart/form-data">
+            <form action="/createSong" method="post" enctype="multipart/form-data">
+                @csrf
                     <h1 class='create-header'>Create a song!</h1>
                     <div class='create-center'>
                         <label for="title" class='create-label'>Title:</label>
@@ -24,7 +25,7 @@
 
                     <div class='create-center'>
                         <label for="picture" class='create-label-picture'>Upload Picture:</label>
-                        <input type="file" id="picture" name="picture" accept="image/*" class='create-image'required>
+                        <input type="file" id="picture" name="picture" accept="image/*" class='create-image'>
                     </div>
                     <div class='create-center'>
                         <button type="submit" class='create-submit'>Submit</button>

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignIdFor(\App\Models\Artist::class);
-            $table->string('description');
-            $table->string('cover');
-            $table->date('release_date');
+            $table->string('description')->nullable();
+            $table->string('cover')->nullable();
+            $table->date('release_date')->nullable();
             $table->timestamps();
         });
     }

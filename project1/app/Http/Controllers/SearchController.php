@@ -20,10 +20,15 @@ class SearchController extends Controller
             return response()->json(['error' => 'No query provided'], 400);
         }
 
-        // Search logic
-        $songs = Song::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('artist', 'LIKE', "%{$query}%")
-            ->orWhere('album', 'LIKE', "%{$query}%")
+        // Search logic with joins
+        $songs = Song::with(['artist', 'album'])
+            ->where('title', 'LIKE', "%{$query}%")
+            ->orWhereHas('artist', function ($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%");
+            })
+            ->orWhereHas('album', function ($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%");
+            })
             ->get();
 
         // Return JSON response for AJAX
@@ -31,12 +36,12 @@ class SearchController extends Controller
             'songs' => $songs->map(function ($song) {
                 return [
                     'title' => $song->title,
-                    'artist' => $song->artist,
-                    'cover_image' => asset('images/covers/' . $song->cover_image),
-                    'file' => asset('music/' . $song->file),
+                    'artist' => $song->artist->name,
+                    'album' => $song->album->name,
+                    'cover_image' => asset('storage/' . $song->cover_path),
+                    'file_path' => asset('storage/' . $song->file_path),
                 ];
             }),
         ]);
     }
-
 }

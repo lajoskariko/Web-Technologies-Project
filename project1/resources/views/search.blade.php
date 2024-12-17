@@ -212,10 +212,10 @@
 
                     data.songs.forEach(song => {
                         html += `
-                        <div class="song-card" data-src="${song.file_path}" data-title="${song.title}" data-artist="${song.artist.name}">
+                        <div class="song-card" data-src="${song.file_path}" data-title="${song.title}" data-artist="${song.artist}">
                             <img src="${song.cover_image}" alt="${song.title}">
                             <h3>${song.title}</h3>
-                            <p>${song.artist.name}</p>
+                            <p>${song.artist}</p>
                         </div>`;
                     });
 

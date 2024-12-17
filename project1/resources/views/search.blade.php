@@ -130,6 +130,10 @@
             background: #666;
         }
 
+        .errors{
+            text-align: left;
+        }
+
     </style>
 
     <h2>Search Music</h2>
@@ -137,6 +141,15 @@
         <input type="text" name="query" placeholder="Search for songs, artists, or albums..." required>
         <button type="submit">Search</button>
     </form>
+    <div>
+        @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-500 text-s font-semibold">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 
     @if(isset($songs))
         <h3>Search Results for "{{ request()->input('query') }}"</h3>

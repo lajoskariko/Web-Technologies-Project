@@ -16,6 +16,26 @@ class AdminController extends Controller
         return view('create');
     }
 
+    public function createSong(Request $request)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'title' => 'required|string|min:2',
+            'artist' => 'required|string|min:2',
+            'album' => 'required|string|min:2',
+            'release_date' => 'required|date',
+        ]);
+
+        // Create the song
+        $song->artist = $validated['artist'];
+        $song->title = $validated['title'];
+        $song->album = $validated['album'];
+        $song->release_date = $validated['release_date'];
+        $song->save();
+
+        return redirect()->route('library')->with('success', 'Song created successfully!');
+    }
+
     public function updateView($id = null)
     {
         if ($id) {
@@ -36,9 +56,9 @@ class AdminController extends Controller
     {
         // Validate the request
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
-            'album' => 'required|string|max:255',
+            'title' => 'required|string|min:2',
+            'artist' => 'required|string|min:2',
+            'album' => 'required|string|min:2',
             'release_date' => 'required|date',
         ]);
 

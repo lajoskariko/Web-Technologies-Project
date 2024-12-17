@@ -344,6 +344,14 @@ h3 {
     }
 }
 
+.errors {
+    text-align: center;
+}
+
+.error{
+    text-align: left;
+}
+
 
 
 

@@ -14,7 +14,11 @@ class SearchController extends Controller
 
     public function results(Request $request)
     {
-        $query = $request->input('query');
+        $validated = $request->validate([
+            'query' => 'required|string|min:2'
+        ]);
+
+        $query = $validated;
 
         if (!$query) {
             return response()->json(['error' => 'No query provided'], 400);

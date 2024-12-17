@@ -76,20 +76,6 @@
             color: #bbb;
         }
 
-        .player-controls button {
-            background: #555;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-
-        .player-controls button:hover {
-            background: #666;
-        }
     </style>
 
     <div class="hero">

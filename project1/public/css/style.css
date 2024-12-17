@@ -112,42 +112,6 @@ body {
     font-size: 14px;
 }
 
-.audio-player {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #282828;
-    display: flex;
-    align-items: center;
-    padding: 10px 30px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
-}
-
-.audio-player .controls {
-    display: flex;
-    align-items: center;
-}
-
-.audio-player .controls button {
-    background: none;
-    border: none;
-    color: #FFFFFF;
-    font-size: 24px;
-    margin-right: 20px;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.audio-player .controls button:hover {
-    color: #1DB954;
-}
-
-.audio-player .track-info {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 16px;
-}
-
 @media (max-width: 600px) {
     .nav-links {
         display: none;
@@ -263,8 +227,6 @@ h3 {
     background-color: #ff4c4c;
 }
 
-
-
 .create-header {
     text-align: center;
     margin-bottom: 50px;
@@ -344,18 +306,10 @@ h3 {
     }
 }
 
-
-
-
-
-
-
-
-/* Ensure the body inherits dark theme */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #121212; /* Dark background for the whole page */
+    background-color: #121212; 
     color: #FFFFFF; /* Light text color */
 }
 
@@ -456,4 +410,69 @@ ul li {
 
 .delete-link:hover {
     color: #84050a;
+}
+
+.music-player {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    background-color: #222;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.music-player .player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.music-player .button-container {
+    margin-bottom: 10px;
+    border-radius: 3px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.music-player .progress-container {
+    width: 40%;
+    height: 5px;
+    background: #444;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+}
+
+.music-player .progress-bar {
+    height: 100%;
+    background: #1db954;
+    width: 0;
+    transition: width 0.1s linear;
+    border-radius: 10px;
+}
+
+.music-player .volume-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.music-player .volume-container i {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.music-player #volume-slider {
+    width: 200px;
+    margin-bottom: 10px;
 }

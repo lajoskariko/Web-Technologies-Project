@@ -50,21 +50,6 @@
             font-size: 0.9rem;
         }
 
-        .music-player {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #333;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-sizing: border-box;
-            z-index: 999;
-        }
-
         .music-info {
             display: flex;
             align-items: center;
@@ -94,20 +79,6 @@
             color: #bbb;
         }
 
-        .player-controls button {
-            background: #555;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-
-        .player-controls button:hover {
-            background: #666;
-        }
     </style>
 
     <h2>Music Library</h2>
@@ -116,11 +87,11 @@
             <div class="song-card"
                  data-src="{{ asset('storage/' . $song->file_path) }}"
                  data-title="{{ $song->title }}"
-                 data-artist="{{ $song->artist->name}}"
+                 data-artist="{{ $song->artist}}"
                  data-cover="{{ asset('storage/' . $song->cover_path) }}">
                 <img src="{{ asset('storage/' . $song->cover_path) }}" alt="{{ $song->title }}">
                 <h3>{{ $song->title }}</h3>
-                <p>{{ $song->artist->name }}</p>
+                <p>{{ $song->artist }}</p>
             </div>
         @endforeach
     </div>

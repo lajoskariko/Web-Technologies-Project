@@ -6,7 +6,33 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SongController;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
+
+Route::post('login', function (Request $request) {
+    $user = User::where('email', $request->email)->first();
+
+    if ($user && Hash::check($request->password, $user->password)) {
+        $token = $user->createToken('MusicLibraryToken')->plainTextToken();
+        return response()->json(['token' => $token]);
+    }
+
+    return response()->json(['error' => 'Unauthorized'], 401);
+});
+
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+    return $request->user();
+});
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('songs', [SongController::class, 'index']);  
+    Route::get('songs/{id}', [SongController::class, 'show']); 
+    Route::post('songs', [SongController::class, 'store']);
+    Route::put('songs/{id}', [SongController::class, 'update']); 
+    Route::delete('songs/{id}', [SongController::class, 'destroy']); 
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'homeView'])->name('home');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'libraryView'])->name('library');
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'searchView'])->name('search');

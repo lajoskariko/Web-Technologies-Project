@@ -133,31 +133,15 @@
     </style>
 
     <h2>Search Music</h2>
-    <form action="{{ route('search.results') }}" method="GET" class="search-form">
-        <input type="text" name="query" placeholder="Search for songs, artists, or albums..." required>
+    <form id="search-form" class="search-form">
+        @csrf
+        <input id="search-query" type="text" name="query" placeholder="Search for songs, artists, or albums..." required>
         <button type="submit">Search</button>
     </form>
 
-    @if(isset($songs))
-        <h3>Search Results for "{{ request()->input('query') }}"</h3>
-        @if($songs->isEmpty())
-            <p>No results found.</p>
-        @else
-            <div class="music-grid">
-                @foreach($songs as $song)
-                    <div class="song-card"
-                         data-src="{{ asset('music/' . $song->file) }}"
-                         data-title="{{ $song->title }}"
-                         data-artist="{{ $song->artist }}"
-                         data-cover="{{ asset('images/covers/' . $song->cover_image) }}">
-                        <img src="{{ asset('images/covers/' . $song->cover_image) }}" alt="{{ $song->title }}">
-                        <h3>{{ $song->title }}</h3>
-                        <p>{{ $song->artist }}</p>
-                    </div>
-                @endforeach
-            </div>
-        @endif
-    @endif
+    <div id="search-results">
+        <!-- AJAX will dynamically populate this section -->
+    </div>
 
     <div class="music-player">
         <div class="music-info">
@@ -174,62 +158,79 @@
         <audio id="audio-player" src=""></audio>
     </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchForm = document.getElementById('search-form');
-        const searchResults = document.getElementById('search-results');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchForm = document.getElementById('search-form');
+            const searchResults = document.getElementById('search-results');
+            const queryInput = document.getElementById('search-query');
 
-        searchForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent default form submission
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form submission
 
-            const query = document.getElementById('search-query').value;
+                const query = queryInput.value.trim();
 
-            if (!query.trim()) {
-                alert('Please enter a search term.');
-                return;
-            }
-
-            // AJAX request to fetch search results
-            fetch("{{ route('search.results') }}", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest', // Identify as AJAX request
-                },
-                body: JSON.stringify({ query: query }),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (!query) {
+                    alert('Please enter a search term.');
+                    return;
                 }
-                return response.json();
-            })
-            .then(data => {
-                if (data.songs.length === 0) {
-                    searchResults.innerHTML = `<p>No results found for "${query}".</p>`;
-                } else {
-                    let html = `<h3>Search Results for "${query}"</h3><div class="music-grid">`;
 
-                    data.songs.forEach(song => {
-                        html += `
-                        <div class="song-card" data-src="${song.file}" data-title="${song.title}" data-artist="${song.artist}">
-                            <img src="${song.cover_image}" alt="${song.title}">
-                            <h3>${song.title}</h3>
-                            <p>${song.artist}</p>
-                        </div>`;
+                // AJAX request to fetch search results
+                fetch("{{ route('search.results') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest', // Identify as AJAX request
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}" // Include CSRF token
+                    },
+                    body: JSON.stringify({ query: query }),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Clear previous results
+                        searchResults.innerHTML = '';
+
+                        if (data.songs.length === 0) {
+                            searchResults.innerHTML = `<p>No results found for "${query}".</p>`;
+                        } else {
+                            let html = `<h3>Search Results for "${query}"</h3><div class="music-grid">`;
+
+                            data.songs.forEach(song => {
+                                html += `
+                                    <div class="song-card"
+                                         data-src="${song.file}"
+                                         data-title="${song.title}"
+                                         data-artist="${song.artist}"
+                                         data-cover="${song.cover_image}">
+                                        <img src="${song.cover_image}" alt="${song.title}">
+                                        <h3>${song.title}</h3>
+                                        <p>${song.artist}</p>
+                                    </div>`;
+                            });
+
+                            html += `</div>`;
+                            searchResults.innerHTML = html;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching search results:', error);
+                        searchResults.innerHTML = '<p>An error occurred. Please try again later.</p>';
                     });
-
-                    html += `</div>`;
-                    searchResults.innerHTML = html;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching search results:', error);
-                searchResults.innerHTML = '<p>An error occurred. Please try again later.</p>';
             });
         });
-    });
-</script>
-@endsection
 
+        function playAudio() {
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.play();
+        }
+
+        function pauseAudio() {
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.pause();
+        }
+    </script>
 </x-app-layout>
